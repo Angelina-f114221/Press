@@ -21,4 +21,15 @@ public class PrintingHouse {
         }
         return total;
     }
+
+    public static double calculatePrintingRevenue(int numberOfCopies, double pricePerCopy,
+                                                  int discountThreshold, double discountPercent) {
+        if (numberOfCopies <= discountThreshold) {
+            return numberOfCopies * pricePerCopy;
+        } else {
+            double discountedPrice = pricePerCopy * (1 - discountPercent / 100.0);
+            return numberOfCopies * discountedPrice;
+        }
+    }
+
 }
