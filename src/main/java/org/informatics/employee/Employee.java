@@ -1,6 +1,8 @@
 package org.informatics.employee;
 
-public abstract class Employee {
+import java.io.Serializable;
+
+public abstract class Employee implements Serializable {
     protected String name;
     protected double baseSalary;
 
@@ -10,4 +12,12 @@ public abstract class Employee {
     }
 
     public abstract double getSalary(double totalRevenue);
+
+    public String getName() {
+        return name;
+    }
+
+    public double getBaseSalary() {
+        return baseSalary;
+    }
 }
