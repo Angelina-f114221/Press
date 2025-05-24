@@ -1,13 +1,15 @@
 package org.informatics.employee;
 
+import java.math.BigDecimal;
+
 public class Operator extends Employee {
-    public Operator(String name, double baseSalary) {
+    public Operator(String name, BigDecimal baseSalary) {
         super(name, baseSalary);
     }
 
     @Override
-    public double getSalary(double totalRevenue) {
-        return baseSalary;
+    public BigDecimal getSalary(BigDecimal totalRevenue) {
+        return this.getBaseSalary();
     }
 }
 
