@@ -1,23 +1,24 @@
 package org.informatics.employee;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public abstract class Employee implements Serializable {
-    protected String name;
-    protected double baseSalary;
+    private String name;
+    private BigDecimal baseSalary;
 
-    public Employee(String name, double baseSalary) {
+    public Employee(String name, BigDecimal baseSalary) {
         this.name = name;
         this.baseSalary = baseSalary;
     }
 
-    public abstract double getSalary(double totalRevenue);
+    public abstract BigDecimal getSalary(BigDecimal totalRevenue);
 
     public String getName() {
         return name;
     }
 
-    public double getBaseSalary() {
+    public BigDecimal getBaseSalary() {
         return baseSalary;
     }
 }
