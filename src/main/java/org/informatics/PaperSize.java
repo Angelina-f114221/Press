@@ -1,13 +1,15 @@
 package org.informatics;
 
+import java.math.BigDecimal;
+
 public enum PaperSize {
     A5, A4, A3, A2, A1;
 
-    public double getSizeMultiplier(double increasePercent) {
+    public BigDecimal getSizeMultiplier(BigDecimal increasePercent) {
         int steps = getStepsFromA5();
-        double multiplier = 1.0;
+        BigDecimal multiplier = BigDecimal.valueOf(1.0);
         for (int i = 0; i < steps; i++) {
-            multiplier *= (1 + increasePercent);
+            multiplier = multiplier.multiply(increasePercent.add(BigDecimal.valueOf(1)));
         }
         return multiplier;
     }
