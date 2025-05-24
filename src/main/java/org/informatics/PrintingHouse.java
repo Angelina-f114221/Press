@@ -1,7 +1,8 @@
 package org.informatics;
-
+// NOT PUSHED
 import org.informatics.employee.Employee;
-import org.informatics.PaperSize;
+
+import java.util.List;
 
 public class PrintingHouse {
 
@@ -13,11 +14,10 @@ public class PrintingHouse {
         return total;
     }
 
-    public static double calculatePaperExpenses(PaperSize[] sizes, double[] basePricesA5, int[] quantities, double increasePercentPerStep) {
+    public static double calculatePaperExpenses(List<Paper> papers, List<Integer> quantities) {
         double total = 0;
-        for (int i = 0; i < sizes.length; i++) {
-            double multiplier = sizes[i].getSizeMultiplier(increasePercentPerStep);
-            total += basePricesA5[i] * multiplier * quantities[i];
+        for (int i = 0; i < papers.size(); i++) {
+            total += papers.get(i).getActualPrice() * quantities.get(i);
         }
         return total;
     }
@@ -31,5 +31,4 @@ public class PrintingHouse {
             return numberOfCopies * discountedPrice;
         }
     }
-
 }
