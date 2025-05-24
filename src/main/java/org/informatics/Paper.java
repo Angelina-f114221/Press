@@ -1,12 +1,14 @@
 package org.informatics;
 
+import java.math.BigDecimal;
+
 public class Paper {
     private PaperType type;
     private PaperSize size;
-    private double basePriceA5; // базова цена за A5
-    private double increasePercentPerStep;
+    private BigDecimal basePriceA5; // базова цена за A5
+    private BigDecimal increasePercentPerStep;
 
-    public Paper(PaperType type, PaperSize size, double basePriceA5, double increasePercentPerStep) {
+    public Paper(PaperType type, PaperSize size, BigDecimal basePriceA5, BigDecimal increasePercentPerStep) {
         this.type = type;
         this.size = size;
         this.basePriceA5 = basePriceA5;
@@ -21,15 +23,15 @@ public class Paper {
         return size;
     }
 
-    public double getBasePriceA5() {
+    public BigDecimal getBasePriceA5() {
         return basePriceA5;
     }
 
-    public double getIncreasePercentPerStep() {
+    public BigDecimal getIncreasePercentPerStep() {
         return increasePercentPerStep;
     }
 
-    public double getActualPrice() {
-        return basePriceA5 * size.getSizeMultiplier(increasePercentPerStep);
+    public BigDecimal getActualPrice() {
+        return basePriceA5.multiply(size.getSizeMultiplier(increasePercentPerStep));
     }
 }
