@@ -1,5 +1,6 @@
 package org.informatics;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,13 @@ public class PrintingMachine {
     private Map<Edition, Integer> printedEditions = new HashMap<>();
 
     public PrintingMachine(int maxPaperCapacity, boolean supportsColor, int pagesPerMinute) {
+        if (maxPaperCapacity <= 0) {
+            throw new IllegalArgumentException("Paper capacity must be greater than zero.");
+        }
+        if (pagesPerMinute <= 0) {
+            throw new IllegalArgumentException("Pages per minute must be greater than zero.");
+        }
+
         this.maxPaperCapacity = maxPaperCapacity;
         this.supportsColor = supportsColor;
         this.pagesPerMinute = pagesPerMinute;
@@ -19,24 +27,33 @@ public class PrintingMachine {
     }
 
     public void loadPaper(int sheets) {
-        if (currentPaper + sheets > maxPaperCapacity) {
-            currentPaper = maxPaperCapacity;
-        } else {
-            currentPaper += sheets;
+        if (sheets <= 0) {
+            throw new IllegalArgumentException("Number of sheets must be greater than zero.");
         }
+
+        currentPaper = Math.min(currentPaper + sheets, maxPaperCapacity);
     }
 
     public void printEdition(Edition edition, int copies) throws Exception {
-        if (edition.isColor() && !supportsColor) {
-            throw new Exception("No colorful option.");
+        if (edition == null) {
+            throw new IllegalArgumentException("Edition cannot be null.");
+        }
+        if (copies <= 0) {
+            throw new IllegalArgumentException("Number of copies must be greater than zero.");
         }
 
-        int totalPages = edition.getNumberOfPages() * copies;
-        if (totalPages > currentPaper) {
+        if (edition.isColor() && !supportsColor) {
+            throw new Exception("This machine does not support color printing.");
+        }
+
+        BigDecimal pagesPerCopy = BigDecimal.valueOf(edition.getNumberOfPages());
+        BigDecimal totalPages = pagesPerCopy.multiply(BigDecimal.valueOf(copies));
+
+        if (totalPages.intValue() > currentPaper) {
             throw new Exception("Not enough paper for printing.");
         }
 
-        currentPaper -= totalPages;
+        currentPaper -= totalPages.intValue();
 
         printedEditions.put(edition, printedEditions.getOrDefault(edition, 0) + copies);
     }
@@ -45,8 +62,10 @@ public class PrintingMachine {
         int total = 0;
         for (Map.Entry<Edition, Integer> entry : printedEditions.entrySet()) {
             Edition edition = entry.getKey();
-            int copies = entry.getValue();
-            total += edition.getNumberOfPages() * copies;
+            if (edition != null) {
+                int pages = edition.getNumberOfPages();
+                total += pages * entry.getValue();
+            }
         }
         return total;
     }
