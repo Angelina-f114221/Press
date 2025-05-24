@@ -1,21 +1,23 @@
 package org.informatics;
+
 import org.informatics.employee.Employee;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class FileReport {
 
-    public static void saveReport(List<Edition> editions, double revenue, double expenses, String filename) throws IOException {
+    public static void saveReport(List<Edition> editions, BigDecimal revenue, BigDecimal expenses, String filename) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Edition e : editions) {
                 writer.write(String.format("Edition: %s, Pages: %d, Color: %b, Paper: %s %s",
                         e.getTitle(), e.getNumberOfPages(), e.isColor(), e.getPaperSize(), e.getPaperType()));
                 writer.newLine();
             }
-            writer.write("Revenue: " + revenue);
+            writer.write("Revenue: " + revenue.toPlainString());
             writer.newLine();
-            writer.write("Expenses: " + expenses);
+            writer.write("Expenses: " + expenses.toPlainString());
         }
     }
 
