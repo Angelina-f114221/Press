@@ -1,5 +1,4 @@
 package org.informatics;
-// NOT PUSHED
 import org.informatics.employee.Employee;
 
 import java.io.*;
