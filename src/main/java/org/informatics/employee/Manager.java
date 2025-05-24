@@ -1,20 +1,22 @@
 package org.informatics.employee;
 
-public class Manager extends Employee {
-    private double bonusPercent;
-    private double revenueThreshold;
+import java.math.BigDecimal;
 
-    public Manager(String name, double baseSalary, double bonusPercent, double revenueThreshold) {
+public class Manager extends Employee {
+    private BigDecimal bonusPercent;
+    private BigDecimal revenueThreshold;
+
+    public Manager(String name, BigDecimal baseSalary, BigDecimal bonusPercent, BigDecimal revenueThreshold) {
         super(name, baseSalary);
         this.bonusPercent = bonusPercent;
         this.revenueThreshold = revenueThreshold;
     }
 
     @Override
-    public double getSalary(double totalRevenue) {
-        if (totalRevenue > revenueThreshold) {
-            return baseSalary + (baseSalary * bonusPercent);
+    public BigDecimal getSalary(BigDecimal totalRevenue) {
+        if (totalRevenue.compareTo(revenueThreshold) > 0) {
+            return getBaseSalary().add(getBaseSalary().multiply(bonusPercent).divide(BigDecimal.valueOf(100)));
         }
-        return baseSalary;
+        return getBaseSalary();
     }
 }
