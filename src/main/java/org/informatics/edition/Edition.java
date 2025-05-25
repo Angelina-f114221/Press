@@ -1,4 +1,7 @@
-package org.informatics;
+package org.informatics.edition;
+
+import org.informatics.PaperSize;
+import org.informatics.PaperType;
 
 public class Edition {
     private String title;
