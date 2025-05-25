@@ -3,7 +3,7 @@ package org.informatics;
 import java.math.BigDecimal;
 
 public class Paper {
-    private PaperType type;
+    private final PaperType type;
     private PaperSize size;
     private BigDecimal basePriceA5; // базова цена за A5
     private BigDecimal increasePercentPerStep;
