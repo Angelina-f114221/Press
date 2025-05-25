@@ -18,4 +18,10 @@ public enum PaperSize {
     public BigDecimal getMultiplier() {
         return multiplier;
     }
+
+    public BigDecimal getSizeMultiplier(BigDecimal increasePercentPerStep) {
+        BigDecimal steps = this.multiplier.subtract(BigDecimal.ONE);
+        BigDecimal factor = BigDecimal.ONE.add(increasePercentPerStep.divide(BigDecimal.valueOf(100)));
+        return factor.pow(steps.intValue());
+    }
 }
