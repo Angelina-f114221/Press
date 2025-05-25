@@ -9,7 +9,7 @@ public class Operator extends Employee {
 
     @Override
     public BigDecimal getSalary(BigDecimal totalRevenue) {
-        return this.getBaseSalary();
+        return getBaseSalary();
     }
 }
 
