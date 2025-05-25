@@ -8,7 +8,13 @@ public class Poster extends Edition {
         super(title, numberOfPages, isColor, paperType, paperSize);
     }
 
+    @Override
     public String getEditionType() {
         return "Poster";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
