@@ -8,7 +8,13 @@ public class Book extends Edition {
         super(title, numberOfPages, isColor, paperType, paperSize);
     }
 
+    @Override
     public String getEditionType() {
         return "Book";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
