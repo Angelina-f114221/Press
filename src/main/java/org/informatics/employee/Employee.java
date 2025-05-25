@@ -1,5 +1,5 @@
 package org.informatics.employee;
-// not pushed - name is now final
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
