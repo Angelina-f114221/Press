@@ -21,4 +21,12 @@ public abstract class Employee implements Serializable {
     public BigDecimal getBaseSalary() {
         return baseSalary;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", baseSalary=" + baseSalary +
+                '}';
+    }
 }
