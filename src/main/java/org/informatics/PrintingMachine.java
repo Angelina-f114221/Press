@@ -1,12 +1,13 @@
 package org.informatics;
 
-import java.math.BigDecimal;
+import org.informatics.edition.Edition;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class PrintingMachine {
-    private int maxPaperCapacity;
-    private boolean supportsColor;
+    private final int maxPaperCapacity;
+    private final boolean supportsColor;
     private int pagesPerMinute;
     private int currentPaper;
 
@@ -27,50 +28,41 @@ public class PrintingMachine {
     }
 
     public void loadPaper(int sheets) {
-        if (sheets <= 0) {
-            throw new IllegalArgumentException("Number of sheets must be greater than zero.");
+        if (currentPaper + sheets > maxPaperCapacity) {
+            throw new IllegalArgumentException("Too many sheets!");
         }
-
-        currentPaper = Math.min(currentPaper + sheets, maxPaperCapacity);
+        currentPaper += sheets;
     }
 
-    public void printEdition(Edition edition, int copies) throws Exception {
-        if (edition == null) {
-            throw new IllegalArgumentException("Edition cannot be null.");
-        }
-        if (copies <= 0) {
-            throw new IllegalArgumentException("Number of copies must be greater than zero.");
-        }
 
-        if (edition.isColor() && !supportsColor) {
-            throw new Exception("This machine does not support color printing.");
+
+    public void printEdition(Edition edition, boolean colorRequired) throws Exception {
+        if (colorRequired && !supportsColor) {
+            throw new InvalidPrintModeException("No color printing");
         }
 
-        BigDecimal pagesPerCopy = BigDecimal.valueOf(edition.getNumberOfPages());
-        BigDecimal totalPages = pagesPerCopy.multiply(BigDecimal.valueOf(copies));
+        int totalPages = edition.getCopies() * edition.getNumberOfPages();
 
-        if (totalPages.intValue() > currentPaper) {
+        if (totalPages > currentPaper) {
             throw new Exception("Not enough paper for printing.");
         }
 
-        currentPaper -= totalPages.intValue();
+        currentPaper -= totalPages;
 
-        printedEditions.put(edition, printedEditions.getOrDefault(edition, 0) + copies);
+        printedEditions.put(edition, printedEditions.getOrDefault(edition, 0) + totalPages);
+    }
+
+    public void printEdition(Edition edition, int copies) throws Exception {
+        edition.setCopies(copies);
+        printEdition(edition, edition.isColor());
     }
 
     public int getTotalPrintedPages() {
-        int total = 0;
-        for (Map.Entry<Edition, Integer> entry : printedEditions.entrySet()) {
-            Edition edition = entry.getKey();
-            if (edition != null) {
-                int pages = edition.getNumberOfPages();
-                total += pages * entry.getValue();
-            }
-        }
-        return total;
+        return printedEditions.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getNumberOfPages() * entry.getValue())
+                .sum();
     }
 
-    public int getCurrentPaper() {
-        return currentPaper;
-    }
+
+
 }
