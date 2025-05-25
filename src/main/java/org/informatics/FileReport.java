@@ -1,5 +1,6 @@
 package org.informatics;
 
+import org.informatics.edition.Edition;
 import org.informatics.employee.Employee;
 
 import java.io.*;
