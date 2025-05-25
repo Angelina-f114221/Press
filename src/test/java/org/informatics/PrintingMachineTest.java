@@ -32,9 +32,9 @@ class PrintingMachineTest {
 
     @Test
     void loadPaperRejectsOverflow() {
-        monoOnly.loadPaper(90); // OK
+        monoOnly.loadPaper(90);
         assertThrows(IllegalArgumentException.class,
-                () -> monoOnly.loadPaper(20)); // would exceed capacity
+                () -> monoOnly.loadPaper(20));
     }
 
     @Test
@@ -52,7 +52,7 @@ class PrintingMachineTest {
     @Test
     @DisplayName("not enough paper → generic Exception")
     void rejectsWhenOutOfPaper() {
-        colorCapable.loadPaper(5); // fewer than 10 pages to be printed
+        colorCapable.loadPaper(5);
 
         Book book = new Book("BigBook", 10, false,
                 PaperType.REGULAR, PaperSize.A5);
@@ -65,8 +65,8 @@ class PrintingMachineTest {
     @DisplayName("successful mono print updates totals")
     void successfulPrintUpdatesTotals() throws Exception {
         int copies = 2;
-        int pagesPerCopy = 10;                      // defined in Book()
-        int sheetsNeeded = copies * pagesPerCopy;   // 20
+        int pagesPerCopy = 10;
+        int sheetsNeeded = copies * pagesPerCopy;
 
         colorCapable.loadPaper(100);
 
