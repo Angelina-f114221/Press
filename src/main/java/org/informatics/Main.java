@@ -25,6 +25,14 @@ public class Main {
             Employee manager  = new Manager ("Maria", new BigDecimal("1500"), new BigDecimal("10"), new BigDecimal("3000"));
             List<Employee> employees = Arrays.asList(operator, manager);
 
+            Serialization serialization = new Serialization();
+            serialization.serialize(employees);
+
+            List<Employee> employees1 = serialization.deserialization();
+            for (Employee employee : employees1) {
+                System.out.println(employee);
+            }
+
             Edition book      = new Book     ("Java Basics",    200, false, PaperType.REGULAR,   PaperSize.A4);
             Edition newspaper = new Newspaper("Daily News",      32, false, PaperType.NEWSPAPER, PaperSize.A4);
             Edition poster    = new Poster   ("Concert Poster",   1, true,  PaperType.GLOSSY,    PaperSize.A3);
