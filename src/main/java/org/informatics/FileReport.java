@@ -1,5 +1,5 @@
 package org.informatics;
-
+// push
 import org.informatics.edition.Edition;
 import org.informatics.employee.Employee;
 
@@ -19,6 +19,18 @@ public class FileReport {
             writer.write("Revenue: " + revenue.toPlainString());
             writer.newLine();
             writer.write("Expenses: " + expenses.toPlainString());
+        }
+    }
+
+    public static void serializeEmployee(Employee employee, String filename) throws IOException {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(employee);
+        }
+    }
+
+    public static Employee deserializeEmployee(String filename) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            return (Employee) in.readObject();
         }
     }
 
