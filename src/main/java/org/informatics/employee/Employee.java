@@ -17,4 +17,8 @@ public abstract class Employee implements Serializable {
     public String getName() {
         return name;
     }
+
+    public BigDecimal getBaseSalary() {
+        return baseSalary;
+    }
 }
