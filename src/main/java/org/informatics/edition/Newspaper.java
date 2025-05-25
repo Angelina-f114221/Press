@@ -8,7 +8,13 @@ public class Newspaper extends Edition {
         super(title, numberOfPages, isColor, paperType, paperSize);
     }
 
+    @Override
     public String getEditionType() {
         return "Newspaper";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
