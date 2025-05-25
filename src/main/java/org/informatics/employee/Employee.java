@@ -1,10 +1,10 @@
 package org.informatics.employee;
-
+// not pushed - name is now final
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 public abstract class Employee implements Serializable {
-    private String name;
+    private final String name;
     private BigDecimal baseSalary;
 
     public Employee(String name, BigDecimal baseSalary) {
@@ -16,9 +16,5 @@ public abstract class Employee implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public BigDecimal getBaseSalary() {
-        return baseSalary;
     }
 }
