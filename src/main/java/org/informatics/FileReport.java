@@ -1,5 +1,4 @@
 package org.informatics;
-// push
 import org.informatics.edition.Edition;
 import org.informatics.employee.Employee;
 
