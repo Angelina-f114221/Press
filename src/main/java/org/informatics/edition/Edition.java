@@ -25,7 +25,7 @@ public class Edition {
         BigDecimal pricePerPage = house.getPaperPrice(type, size);
         BigDecimal basePrice = pricePerPage.multiply(BigDecimal.valueOf(numberOfPages));
         if (isColor) {
-            basePrice = basePrice.multiply(BigDecimal.valueOf(1.5)); // примерно 50% надценка за цвят
+            basePrice = basePrice.multiply(BigDecimal.valueOf(1.5)); 
         }
         return basePrice.multiply(BigDecimal.valueOf(copies));
     }
