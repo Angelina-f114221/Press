@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Paper {
     private final PaperType type;
     private PaperSize size;
-    private BigDecimal basePriceA5; // базова цена за A5
+    private BigDecimal basePriceA5;
     private BigDecimal increasePercentPerStep;
 
     public Paper(PaperType type, PaperSize size, BigDecimal basePriceA5, BigDecimal increasePercentPerStep) {
