@@ -20,14 +20,14 @@ class PrintingHouseTest {
         @Test
         void appliesManagerBonusWhenRevenueAboveThreshold() {
             Manager mgr = new Manager("Alice",
-                    new BigDecimal("1000"),             // base salary
-                    new BigDecimal("10"),               // bonus %
-                    new BigDecimal("5000"));            // threshold
+                    new BigDecimal("1000"),            
+                    new BigDecimal("10"),               
+                    new BigDecimal("5000"));            
             Operator op = new Operator("Bob", new BigDecimal("800"));
 
             BigDecimal revenue = new BigDecimal("6000");
 
-            BigDecimal expected = new BigDecimal("1900"); // 1000 + 10 % bonus + 800
+            BigDecimal expected = new BigDecimal("1900"); 
             BigDecimal actual   = PrintingHouse.calculateSalaryExpenses(
                     List.of(mgr, op), revenue);
 
@@ -51,14 +51,12 @@ class PrintingHouseTest {
     @Test
     @DisplayName("calculatePaperExpenses considers actual paper price and quantities")
     void calculatePaperExpenses() {
-        // Paper 1: A3, price becomes 1 × (1 + 0.20)^1 = 1.20
         Paper p1 = new Paper(PaperType.REGULAR, PaperSize.A3,
-                new BigDecimal("1.00"), new BigDecimal("20"));      // 20 % per step
-        // Paper 2: A5 – multiplier step = 0 ⇒ price unchanged
+                new BigDecimal("1.00"), new BigDecimal("20"));  
         Paper p2 = new Paper(PaperType.GLOSSY, PaperSize.A5,
                 new BigDecimal("2.00"), new BigDecimal("20"));
 
-        BigDecimal expected = new BigDecimal("22.0"); // (1.20×10) + (2.00×5)
+        BigDecimal expected = new BigDecimal("22.0");
 
         BigDecimal actual = PrintingHouse.calculatePaperExpenses(
                 List.of(p1, p2), List.of(10, 5));
@@ -83,7 +81,7 @@ class PrintingHouseTest {
         void appliesDiscountWhenAboveThreshold() {
             BigDecimal price = new BigDecimal("2.00");
             BigDecimal revenue = PrintingHouse.calculatePrintingRevenue(
-                    300, price, 200, new BigDecimal("10")); // 10 % off
+                    300, price, 200, new BigDecimal("10"));
 
             assertEquals(0, new BigDecimal("540.00").compareTo(revenue));
         }
