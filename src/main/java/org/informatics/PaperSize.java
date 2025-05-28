@@ -1,27 +1,22 @@
-package org.informatics;
-
-import java.math.BigDecimal;
-
 public enum PaperSize {
-    A5(BigDecimal.valueOf(1.0)),
-    A4(BigDecimal.valueOf(1.5)),
-    A3(BigDecimal.valueOf(2.0)),
-    A2(BigDecimal.valueOf(3.0)),
-    A1(BigDecimal.valueOf(4.0));
+    A5(0),
+    A4(1),
+    A3(2),
+    A2(3),
+    A1(4);
 
-    private final BigDecimal multiplier;
+    private final int stepFromA5;
 
-    PaperSize(BigDecimal multiplier) {
-        this.multiplier = multiplier;
+    PaperSize(int stepFromA5) {
+        this.stepFromA5 = stepFromA5;
     }
 
-    public BigDecimal getMultiplier() {
-        return multiplier;
+    public int getStepFromA5() {
+        return stepFromA5;
     }
 
     public BigDecimal getSizeMultiplier(BigDecimal increasePercentPerStep) {
-        BigDecimal steps = this.multiplier.subtract(BigDecimal.ONE);
         BigDecimal factor = BigDecimal.ONE.add(increasePercentPerStep.divide(BigDecimal.valueOf(100)));
-        return factor.pow(steps.intValue());
+        return factor.pow(stepFromA5);
     }
 }
