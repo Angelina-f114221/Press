@@ -59,13 +59,17 @@ public abstract class Edition {
         return isColor;
     }
 
-    @Override
+   @Override
     public String toString() {
-        return String.format("%s [title=%s, copies=%d, pages=%d, color=%b, paperType=%s, paperSize=%s]",
-                getEditionType(), title, copies, numberOfPages, isColor, type, size);
+        return "Edition{" + getEditionType() +
+                "title='" + title + '\'' +
+                ", copies=" + copies +
+                ", size=" + size +
+                ", type=" + type +
+                ", numberOfPages=" + numberOfPages +
+                ", isColor=" + isColor +
+                '}';
     }
 
-    public String getEditionType() {
-        return "Edition";
-    }
+    public abstract String getEditionType();
 }
