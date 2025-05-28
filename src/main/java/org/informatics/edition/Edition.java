@@ -5,7 +5,7 @@ import org.informatics.PaperType;
 import org.informatics.PrintingHouseInstance;
 
 public abstract class Edition {
-    private String title;
+    private final String title;
     private int copies;
     private PaperSize size;
     private PaperType type;
