@@ -40,8 +40,12 @@ public abstract class Edition {
     }
 
     public void setCopies(int copies) {
-        this.copies = copies;
+    if (copies < 0) {
+        throw new IllegalArgumentException("Copies must be non-negative");
     }
+    this.copies = copies;
+}
+
 
     public PaperSize getPaperSize() {
         return size;
