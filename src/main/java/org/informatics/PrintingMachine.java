@@ -34,8 +34,6 @@ public class PrintingMachine {
         currentPaper += sheets;
     }
 
-
-
     public void printEdition(Edition edition, boolean colorRequired) throws Exception {
         if (colorRequired && !supportsColor) {
             throw new InvalidPrintModeException("No color printing");
@@ -50,11 +48,6 @@ public class PrintingMachine {
         currentPaper -= totalPages;
 
         printedEditions.put(edition, printedEditions.getOrDefault(edition, 0) + totalPages);
-    }
-
-    public void printEdition(Edition edition, int copies) throws Exception {
-        edition.setCopies(copies);
-        printEdition(edition, edition.isColor());
     }
 
     public int getTotalPrintedPages() {
