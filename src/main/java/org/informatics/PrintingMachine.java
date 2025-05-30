@@ -46,8 +46,8 @@ public class PrintingMachine {
         }
 
         currentPaper -= totalPages;
+        printedEditions.put(edition, printedEditions.getOrDefault(edition, 0) + edition.getCopies());
 
-        printedEditions.put(edition, printedEditions.getOrDefault(edition, 0) + totalPages);
     }
 
     public int getTotalPrintedPages() {
