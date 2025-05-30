@@ -60,12 +60,6 @@ public class Main {
             BigDecimal totalExpenses  = paperExpenses.add(salaryExpenses);
 
             FileReport.saveReport(Arrays.asList(book, newspaper, poster), revenue, totalExpenses, "report.txt");
-            FileReport.serializeEmployee(manager, "manager.ser");
-            Employee restored = FileReport.deserializeEmployee("manager.ser");
-
-            System.out.println("Revenue:  " + revenue);
-            System.out.println("Expenses: " + totalExpenses);
-            System.out.println("Restored: " + restored.getName() + "  Salary: " + restored.getSalary(revenue));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
